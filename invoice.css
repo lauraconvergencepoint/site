@@ -58,7 +58,7 @@ input[readonly] { color: #5b6880; background: #eef3f8; cursor: default; }
 .due-shortcuts button { padding: .25rem .45rem; border: 1px solid #d8e2ed; border-radius: 2px; }
 
 .item-editor { display: grid; gap: .75rem; }
-.billing-settings { margin-bottom: .9rem; padding: .9rem; display: grid; grid-template-columns: 1.2fr 1fr 1fr .8fr; gap: .6rem; background: #f8fbff; border: 1px solid #dce7f4; border-radius: 4px; }
+.billing-settings { margin-bottom: .9rem; padding: .9rem; display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; background: #f8fbff; border: 1px solid #dce7f4; border-radius: 4px; }
 .billing-settings label { margin: 0; }
 .import-box { margin-bottom: .9rem; padding: .9rem; background: #fff; border: 1px dashed #aebfd2; border-radius: 4px; }
 .import-box label { margin-bottom: .65rem; }
@@ -101,7 +101,7 @@ input[readonly] { color: #5b6880; background: #eef3f8; cursor: default; }
 .invoice-summary-copy > p:last-child { margin: 0; font-size: 12pt; }
 .invoice-table { width: 100%; border-collapse: collapse; }
 .invoice-table th { padding: 3mm 2mm; color: #fff; background: var(--navy); font-size: 7pt; letter-spacing: .08em; text-align: right; text-transform: uppercase; }
-.invoice-table th:first-child { width: 48%; text-align: left; }
+.invoice-table th:first-child { width: 40%; text-align: left; }
 .invoice-table td { padding: 4mm 2mm; border-bottom: 1px solid #dde5ef; text-align: right; vertical-align: top; }
 .invoice-table td:first-child { text-align: left; font-weight: 650; }
 .invoice-table td span { display: block; margin-top: .8mm; color: #738097; font-size: 8pt; font-weight: 400; white-space: pre-line; }

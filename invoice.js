@@ -42,10 +42,6 @@
     toastTimer = setTimeout(() => toast.classList.remove('visible'), 3200);
   }
 
-  function currencySymbol() {
-    return { GBP: '£', EUR: '€', USD: '$' }[fields('currency').value] || '';
-  }
-
   function money(value) {
     return new Intl.NumberFormat('en-GB', {
       style: 'currency',
@@ -68,11 +64,10 @@
   }
 
   function activeRate() {
-    return Number(fields(fields('billingUnit').value === 'day' ? 'dayRate' : 'hourlyRate').value) || 0;
+    return Number(fields('dayRate').value) || 0;
   }
 
   function quantityFromHours(hours) {
-    if (fields('billingUnit').value === 'hour') return hours;
     const hoursPerDay = Number(fields('hoursPerDay').value) || 7;
     return hours / hoursPerDay;
   }
@@ -211,8 +206,6 @@
     });
 
     const rate = activeRate();
-    const unitLabel = fields('billingUnit').value === 'day' ? 'Days' : 'Hours';
-    document.querySelector('[data-quantity-heading]').textContent = unitLabel;
     itemOutput.innerHTML = '';
     let subtotal = 0;
     let totalTax = 0;
@@ -224,7 +217,7 @@
       totalTax += tax;
       item.row.querySelector('[data-line-total]').textContent = money(line + tax);
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${escapeHtml(item.description || 'Professional service')}<span>${escapeHtml(item.detail)}</span></td><td>${displayQuantity(quantity)}</td><td>${money(rate)}</td><td>${item.tax ? `${item.tax}%` : '—'}</td><td>${money(line + tax)}</td>`;
+      tr.innerHTML = `<td>${escapeHtml(item.description || 'Professional service')}<span>${escapeHtml(item.detail)}</span></td><td>${displayQuantity(item.hours)}</td><td>${displayQuantity(quantity)}</td><td>${money(rate)}</td><td>${item.tax ? `${item.tax}%` : '—'}</td><td>${money(line + tax)}</td>`;
       itemOutput.append(tr);
     });
     document.querySelector('[data-total="subtotal"]').textContent = money(subtotal);
