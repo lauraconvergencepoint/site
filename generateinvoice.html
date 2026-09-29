@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create a branded Convergence Point invoice and export it as a PDF.">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Invoice Generator — Convergence Point</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="invoice.css">
+</head>
+<body>
+  <header class="app-header no-print">
+    <a class="app-brand" href="/" aria-label="Back to Convergence Point">
+      <img src="logo-mark.svg" alt="" width="44" height="40">
+      <span>Convergence Point</span>
+    </a>
+    <div class="header-actions">
+      <span class="privacy-note">Details stay in this browser</span>
+      <button class="button button-ghost" type="button" data-action="preview">Preview</button>
+      <button class="button button-secondary" type="button" data-action="pdf">Export PDF</button>
+      <button class="button button-primary" type="button" data-action="gmail">Send with Gmail</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="editor no-print" aria-label="Invoice editor">
+      <div class="editor-intro">
+        <p class="eyebrow">Invoice generator</p>
+        <h1>Create an invoice</h1>
+        <p>Complete the details below. The A4 invoice updates as you type.</p>
+      </div>
+
+      <form id="invoice-form" novalidate>
+        <section class="form-section">
+          <div class="section-title"><span>01</span><h2>Your details</h2></div>
+          <div class="field-grid two">
+            <label>Trading name<input name="sellerTradingName" value="Convergence Point"></label>
+            <label>Legal name<input name="sellerLegalName" value="Laura Bernal Vergara"></label>
+          </div>
+          <label>Business address<textarea name="sellerAddress" rows="3" placeholder="Add the address used for legal correspondence"></textarea></label>
+          <div class="field-grid two">
+            <label>Email<input name="sellerEmail" type="email" value="laura@convergencepoint.co.uk"></label>
+            <label>Website<input name="sellerWebsite" value="convergencepoint.co.uk"></label>
+          </div>
+          <label>VAT number <span class="optional">optional</span><input name="sellerVat" placeholder="Leave blank if not VAT registered"></label>
+        </section>
+
+        <section class="form-section">
+          <div class="section-title"><span>02</span><h2>Client</h2></div>
+          <label>Organisation or client name<input name="clientCompany" required placeholder="Client organisation"></label>
+          <div class="field-grid two">
+            <label>Contact name<input name="clientName" placeholder="Contact name"></label>
+            <label>Email<input name="clientEmail" type="email" placeholder="client@example.com"></label>
+          </div>
+          <label>Billing address<textarea name="clientAddress" rows="3" placeholder="Client billing address"></textarea></label>
+        </section>
+
+        <section class="form-section">
+          <div class="section-title"><span>03</span><h2>Invoice details</h2></div>
+          <div class="field-grid two">
+            <label>Invoice number<input name="invoiceNumber"></label>
+            <label>Currency<select name="currency"><option value="GBP">GBP — £</option><option value="EUR">EUR — €</option><option value="USD">USD — $</option></select></label>
+            <label>Issue date<input name="issueDate" type="date"></label>
+            <label>Payment due<input name="dueDate" type="date"></label>
+          </div>
+          <div class="due-shortcuts" aria-label="Due date shortcuts">
+            <span>Set due date:</span>
+            <button type="button" data-due-days="14">14 days</button>
+            <button type="button" data-due-days="30">30 days</button>
+            <button type="button" data-due-days="60">60 days</button>
+          </div>
+          <label>Invoice description<textarea name="invoiceDescription" rows="2" placeholder="A short description of the work or engagement"></textarea></label>
+        </section>
+
+        <section class="form-section">
+          <div class="section-title item-heading"><span>04</span><h2>Items</h2><button class="text-button" type="button" data-action="add-item">+ Add item</button></div>
+          <div id="item-editor" class="item-editor"></div>
+        </section>
+
+        <section class="form-section">
+          <div class="section-title"><span>05</span><h2>Payment details</h2></div>
+          <div class="field-grid two">
+            <label>Account name<input name="bankAccountName" value="Laura Bernal Vergara"></label>
+            <label>Bank name<input name="bankName" placeholder="Bank name"></label>
+            <label>Sort code<input name="sortCode" inputmode="numeric" placeholder="00-00-00"></label>
+            <label>Account number<input name="accountNumber" inputmode="numeric" placeholder="00000000"></label>
+            <label>IBAN <span class="optional">optional</span><input name="iban"></label>
+            <label>SWIFT / BIC <span class="optional">optional</span><input name="swift"></label>
+          </div>
+          <label>Payment reference<input name="paymentReference" placeholder="Usually the invoice number"></label>
+          <label class="check-row"><input name="rememberDetails" type="checkbox"><span>Remember my business and bank details on this device</span></label>
+        </section>
+
+        <section class="form-section">
+          <div class="section-title"><span>06</span><h2>Notes</h2></div>
+          <label>Payment terms or note<textarea name="notes" rows="3">Thank you for your business. Please use the invoice number as the payment reference.</textarea></label>
+        </section>
+      </form>
+    </aside>
+
+    <section class="preview-panel" aria-label="Invoice preview">
+      <button class="preview-close no-print" type="button" data-action="close-preview" aria-label="Close preview">×</button>
+      <article id="invoice" class="invoice-sheet">
+        <header class="invoice-header">
+          <div class="invoice-brand">
+            <img src="logo-mark.svg" alt="Convergence Point">
+            <div><strong data-out="sellerTradingName">Convergence Point</strong><span>Turning innovation into impact.</span></div>
+          </div>
+          <div class="invoice-title"><p>Invoice</p><strong data-out="invoiceNumber"></strong></div>
+        </header>
+
+        <section class="invoice-parties">
+          <div class="party from">
+            <p class="invoice-label">From</p>
+            <strong data-out="sellerLegalName">Laura Bernal Vergara</strong>
+            <span data-out="sellerTradingName">Convergence Point</span>
+            <span class="multiline" data-out="sellerAddress"></span>
+            <span data-out="sellerEmail">laura@convergencepoint.co.uk</span>
+            <span data-out="sellerWebsite">convergencepoint.co.uk</span>
+            <span class="optional-output" data-out-prefix="VAT: " data-out="sellerVat"></span>
+          </div>
+          <div class="party bill-to">
+            <p class="invoice-label">Bill to</p>
+            <strong data-out="clientCompany">Client organisation</strong>
+            <span data-out="clientName"></span>
+            <span class="multiline" data-out="clientAddress"></span>
+            <span data-out="clientEmail"></span>
+          </div>
+          <dl class="invoice-dates">
+            <div><dt>Issued</dt><dd data-out-date="issueDate"></dd></div>
+            <div><dt>Payment due</dt><dd data-out-date="dueDate"></dd></div>
+            <div><dt>Currency</dt><dd data-out="currency">GBP</dd></div>
+          </dl>
+        </section>
+
+        <section class="invoice-summary-copy">
+          <p class="invoice-label">For</p>
+          <p data-out="invoiceDescription">Professional services</p>
+        </section>
+
+        <table class="invoice-table">
+          <thead><tr><th>Description</th><th>Qty</th><th>Unit price</th><th>VAT</th><th>Total</th></tr></thead>
+          <tbody id="invoice-items"></tbody>
+        </table>
+
+        <section class="invoice-totals">
+          <dl>
+            <div><dt>Subtotal</dt><dd data-total="subtotal"></dd></div>
+            <div data-tax-row><dt>VAT</dt><dd data-total="tax"></dd></div>
+            <div class="grand-total"><dt>Total due</dt><dd data-total="total"></dd></div>
+          </dl>
+        </section>
+
+        <section class="payment-block">
+          <div>
+            <p class="invoice-label">Payment by bank transfer</p>
+            <dl class="bank-grid">
+              <div><dt>Account name</dt><dd data-out="bankAccountName">Laura Bernal Vergara</dd></div>
+              <div><dt>Bank</dt><dd data-out="bankName"></dd></div>
+              <div><dt>Sort code</dt><dd data-out="sortCode"></dd></div>
+              <div><dt>Account number</dt><dd data-out="accountNumber"></dd></div>
+              <div class="optional-output"><dt>IBAN</dt><dd data-out="iban"></dd></div>
+              <div class="optional-output"><dt>SWIFT / BIC</dt><dd data-out="swift"></dd></div>
+              <div><dt>Reference</dt><dd data-out="paymentReference"></dd></div>
+            </dl>
+          </div>
+          <p class="invoice-note multiline" data-out="notes"></p>
+        </section>
+
+        <footer class="invoice-footer">
+          <span data-out="sellerTradingName">Convergence Point</span>
+          <span data-out="sellerEmail">laura@convergencepoint.co.uk</span>
+          <span>convergencepoint.co.uk</span>
+        </footer>
+      </article>
+    </section>
+  </main>
+
+  <div class="toast no-print" role="status" aria-live="polite" data-toast></div>
+  <dialog id="gmail-dialog" class="gmail-dialog no-print">
+    <button class="dialog-close" type="button" data-action="close-dialog" aria-label="Close">×</button>
+    <p class="eyebrow">One final step</p>
+    <h2>Your Gmail draft is ready</h2>
+    <p>For security, a website cannot attach a file directly to Gmail’s online composer. Export the invoice as a PDF, then attach that downloaded file to the prewritten draft.</p>
+    <div class="dialog-actions">
+      <button class="button button-secondary" type="button" data-action="pdf">1. Export PDF</button>
+      <button class="button button-primary" type="button" data-action="open-gmail">2. Open Gmail draft</button>
+    </div>
+  </dialog>
+
+  <script src="invoice.js"></script>
+</body>
+</html>

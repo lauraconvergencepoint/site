@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 108" role="img" aria-labelledby="title desc">
+  <title id="title">Convergence Point mark</title>
+  <desc id="desc">Three interlocking circles meeting at a central point</desc>
+  <defs>
+    <linearGradient id="gold" x1="10" y1="8" x2="108" y2="100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8d6422"/>
+      <stop offset=".35" stop-color="#f5d890"/>
+      <stop offset=".66" stop-color="#b47c2b"/>
+      <stop offset="1" stop-color="#f4dfaa"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop stop-color="#fff"/>
+      <stop offset=".18" stop-color="#ffe6a8"/>
+      <stop offset=".55" stop-color="#d69d3f" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#d69d3f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g fill="none" stroke="url(#gold)" stroke-width="3">
+    <circle cx="60" cy="35" r="31"/>
+    <circle cx="38" cy="70" r="31"/>
+    <circle cx="82" cy="70" r="31"/>
+  </g>
+  <circle cx="60" cy="58" r="11" fill="url(#glow)"/>
+  <path d="M60 47v22M49 58h22" stroke="#fff3cf" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
