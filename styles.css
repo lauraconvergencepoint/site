@@ -79,15 +79,16 @@ h1 em, .contact h2 em { color: var(--blue); font-weight: 400; font-style: italic
 .route-card::before { content: ""; position: absolute; width: 240px; height: 240px; right: -170px; top: -170px; border-radius: 50%; background: var(--blue); opacity: .08; transition: transform .5s ease; }
 .route-card:hover { z-index: 2; transform: translateY(-8px); background: white; box-shadow: 0 26px 70px rgba(8,27,77,.14); }
 .route-card:hover::before { transform: scale(1.6); }
-.card-topline { display: flex; align-items: center; justify-content: space-between; color: var(--blue); font-size: .76rem; font-weight: 700; }
+.card-topline { margin-bottom: 3.5rem; display: flex; align-items: center; justify-content: space-between; color: var(--blue); font-size: .76rem; font-weight: 700; }
 .card-symbol { font-size: 1.3rem; }
 .card-audience { margin: 3.5rem 0 .7rem; color: #607787; font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
 .route-card h3 { margin: 0 0 1.45rem; font-size: clamp(2rem, 3vw, 2.75rem); line-height: 1; letter-spacing: -.05em; font-weight: 550; }
 .route-card > p:not(.card-audience) { margin: 0; color: var(--ink-soft); }
+.route-card > p.coaching-intro { margin-top: 1rem; }
 .route-card ul { list-style: none; padding: 0; margin: 2rem 0; border-top: 1px solid var(--line); }
 .route-card li { position: relative; padding: .75rem 0 .75rem 1rem; border-bottom: 1px solid var(--line); font-size: .87rem; }
 .route-card li::before { content: ""; position: absolute; width: 5px; height: 5px; border-radius: 50%; left: 0; top: 1.2rem; background: var(--cyan); }
-.route-card > a { margin-top: auto; display: flex; justify-content: space-between; text-decoration: none; font-size: .86rem; font-weight: 700; }
+.route-card > a { padding-top: 2rem; margin-top: auto; display: flex; justify-content: space-between; text-decoration: none; font-size: .86rem; font-weight: 700; }
 .route-card > a span { color: var(--blue); font-size: 1.15rem; }
 
 .manifesto { background: var(--ice); padding: clamp(5rem, 10vw, 10rem) var(--pad); display: grid; grid-template-columns: .3fr .7fr; gap: 3rem; }
